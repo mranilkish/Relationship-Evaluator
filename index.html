@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body >
+       A = {<b id="x" onmouseenter="up()" onmouseleave="dow()">1,2,3</b>}  
+       <br> A x A = {<b id="z" ></b>}
+       <br> MAT= </br> <b id="mm"></b>
+       <br> <b onclick="cal()">Relation</b>={<b id="R" ></b>}
+       <br> <b onclick="cal()">Symmetric</b>={<b id="SYM" >??</b>}
+
+       <script lang="javascript" src="math.js"></script>
+        <script lang="javascript">
+            function up()
+            {
+                zz=document.getElementById("x");
+                str="<input id='y' type=text value="+zz.innerHTML+"></input>"
+                zz.innerHTML=str;
+                
+            }
+
+            function dow()
+            { try{
+                zz=document.getElementById("y");
+                str=zz.value;
+                str=str.replace(/,/g," ");
+                str=str.replace(/ /g,",");
+                document.getElementById("x").innerHTML=str;
+
+                k=str.split(",");
+                pp=""; 
+                mat="";
+                for(i=0;i<k.length;i++){
+                for(j=0;j<k.length;j++)
+                {
+                    tt= "<b id="+k[i]+k[j]+" onclick=t("+k[i]+k[j]+")>1 </b>";
+                    pp+="("+k[i]+","+k[j]+"),"
+                    mat+=tt;
+                }
+                mat+="</br>";
+            }
+                document.getElementById("z").innerHTML=pp;
+                document.getElementById("mm").innerHTML=mat;
+            
+        }catch(e){alert(e)}
+
+            }
+
+            function t(x)
+            {
+                o=document.getElementById(x);
+        //  alert(o.innerHTML);
+                if(parseInt(o.innerHTML)==1 ) {o.innerHTML='0 '; return}
+                 o.innerHTML="1 ";
+
+                
+                
+            }
+            
+            var m=[[]]
+    
+       
+            function cal()
+            {
+            
+                try{
+      
+               str= document.getElementById("x").innerHTML;
+               k=str.split(",");
+                pp=""; 
+            
+                for(i=0;i<k.length;i++)
+                {     m[i]=[0];
+                for(j=0;j<k.length;j++)
+                {
+               
+                    tt= document.getElementById(""+k[i]+k[j]).innerHTML;
+                    if( parseInt(tt)==1 )
+                    {
+                    pp+="("+k[i]+","+k[j]+"),"
+                    m[i][j]=1;
+                    }
+                    else
+                    m[i][j]=0;
+               
+
+         
+                }
+            }
+               
+                n=math.transpose(m);
+
+                if(math.deepEqual(m,n))
+                document.getElementById("SYM").innerHTML="YES";
+                else
+                document.getElementById("SYM").innerHTML="NO";
+                document.getElementById("R").innerHTML=pp;
+            }catch(e){alert(e)}
+              
+                
+                
+               
+                
+        }
+            
+        </script>
+    </body>
+</html>
